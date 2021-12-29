@@ -15,6 +15,9 @@ public class MovementScript : MonoBehaviour {
 
     private bool coroutinePlay;
     
+    List<Transform> EnemiesList = new List<Transform>();
+    public float ColliderRadius;
+
     // Start is called before the first frame update
     void Start() {
         CharCtrlr =  gameObject.GetComponent<CharacterController>();
@@ -75,12 +78,35 @@ public class MovementScript : MonoBehaviour {
             coroutinePlay = true;
             Anim.SetBool("AnimSetAtkBool", true);
             Anim.SetInteger("AnimTransitionState", 2);
+            
+            yield return new WaitForSeconds(0.3f);
+
+            GetEnemiesRange();
+            foreach(Transform enemies in EnemiesList){
+                //executar acao de dano (script no inimigo)
+                EnemyScript enemy = enemies.GetComponent<EnemyScript>();
+                if ( enemy != null){
+                    enemy.GetHit();
+                }
+            }
             yield return new WaitForSeconds(1f);
+
             Anim.SetInteger("AnimTransitionState", transitionVal);
             Anim.SetBool("AnimSetAtkBool", false);
             coroutinePlay = false;
         }
         
+    }
+    void GetEnemiesRange(){
+        foreach(Collider c in Physics.OverlapSphere((transform.position + transform.forward * ColliderRadius), ColliderRadius)){
+            if(c.gameObject.CompareTag("Enemy")){
+                EnemiesList.Add(c.transform);
+            }
+        }
+    }
+    private void OnDraawGizmosSelected(){
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + transform.forward, ColliderRadius);
     }
 
 }
