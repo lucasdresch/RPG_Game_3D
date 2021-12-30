@@ -89,7 +89,7 @@ public class MovementScript : MonoBehaviour {
                     enemy.GetHit();
                 }
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
 
             Anim.SetInteger("AnimTransitionState", transitionVal);
             Anim.SetBool("AnimSetAtkBool", false);
