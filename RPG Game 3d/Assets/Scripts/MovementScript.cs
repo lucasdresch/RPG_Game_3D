@@ -15,6 +15,8 @@ public class MovementScript : MonoBehaviour {
 
     private bool coroutinePlay;
     
+    public float Enemydamage = 10f;
+
     List<Transform> EnemiesList = new List<Transform>();
     public float ColliderRadius;
 
@@ -86,7 +88,7 @@ public class MovementScript : MonoBehaviour {
                 //executar acao de dano (script no inimigo)
                 EnemyScript enemy = enemies.GetComponent<EnemyScript>();
                 if ( enemy != null){
-                    enemy.GetHit();
+                    enemy.GetHit(Enemydamage);
                 }
             }
             yield return new WaitForSeconds(0.3f);
