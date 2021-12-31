@@ -18,6 +18,15 @@ public class MovementScript : MonoBehaviour {
     public float Enemydamage = 10f;
 
     List<Transform> EnemiesList = new List<Transform>();
+    
+
+    [Space]
+    public GameObject objRefHandR;
+    public GameObject objRefHandL;
+    public float offsetX;
+    public float offsetY;
+    public float offsetZ;
+
     public float ColliderRadius;
 
     // Start is called before the first frame update
@@ -27,6 +36,8 @@ public class MovementScript : MonoBehaviour {
 
         Anim = gameObject.GetComponent<Animator>();
         coroutinePlay = false;
+
+
     }
 
     // Update is called once per frame
@@ -100,15 +111,16 @@ public class MovementScript : MonoBehaviour {
         
     }
     void GetEnemiesRange(){
-        foreach(Collider c in Physics.OverlapSphere((transform.position + transform.forward * ColliderRadius), ColliderRadius)){
+        foreach(Collider c in Physics.OverlapSphere((objRefHandR.transform.position + new Vector3(offsetX, offsetY, offsetZ) * ColliderRadius), ColliderRadius)){
             if(c.gameObject.CompareTag("Enemy")){
                 EnemiesList.Add(c.transform);
             }
         }
     }
-    private void OnDraawGizmosSelected(){
+    private void OnDraawGizmos(){
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + transform.forward, ColliderRadius);
+        Gizmos.DrawWireSphere(objRefHandR.transform.position + new Vector3(offsetX, offsetY, offsetZ), ColliderRadius);
+
     }
 
 }
