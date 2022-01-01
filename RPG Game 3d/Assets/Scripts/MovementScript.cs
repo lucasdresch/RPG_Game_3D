@@ -17,7 +17,7 @@ public class MovementScript : MonoBehaviour {
     
     public float Enemydamage = 10f;
 
-    List<Transform> EnemiesList = new List<Transform>();
+    public List<Transform> EnemiesList = new List<Transform>();
     
 
     [Space]
@@ -117,7 +117,7 @@ public class MovementScript : MonoBehaviour {
             }
         }
     }
-    private void OnDraawGizmos(){
+    void OnDraawGizmos(){
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(objRefHandR.transform.position + new Vector3(offsetX, offsetY, offsetZ), ColliderRadius);
 

@@ -9,9 +9,10 @@ public class teste : MonoBehaviour {
     public float offsetY;
     public float offsetZ;
     public float radius;
-    private Vector3 v3;
 
     public int testeGismosType;
+    
+    public MovementScript scriptImport;
     #endregion Gizmos
 
     // Start is called before the first frame update
@@ -24,7 +25,6 @@ public class teste : MonoBehaviour {
         
     }
     void OnDrawGizmosSelected(){
-        v3 = new Vector3(offsetX, offsetY, offsetZ);
         if(testeGismosType == 0){
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(objRef.transform.position + new Vector3(offsetX, offsetY, offsetZ), radius);
