@@ -76,8 +76,8 @@ public class MovementScript : MonoBehaviour {
         if(CharCtrlr.isGrounded){
             if(Input.GetMouseButtonDown(0)){
                 if(Anim.GetBool("AnimSetRunBool")){
-                    Anim.SetBool("AnimeSetRunBool", false);
-                    Anim.SetInteger("AnimTrasitionState", 0);
+                    Anim.SetBool("AnimSetRunBool", false);
+                    Anim.SetInteger("AnimTransitionState", 0);
                 }
                 if(!Anim.GetBool("AnimSetRunBool")){
                     StartCoroutine(Attack(0));
@@ -110,10 +110,17 @@ public class MovementScript : MonoBehaviour {
         }
         
     }
+    IEnumerator Timer(int TimerVal, Transform obj){
+        yield return new WaitForSeconds(TimerVal);
+        EnemiesList.Remove(obj.transform);
+    }
+
     void GetEnemiesRange(){
         foreach(Collider c in Physics.OverlapSphere((objRefHandR.transform.position + new Vector3(offsetX, offsetY, offsetZ) * ColliderRadius), ColliderRadius)){
             if(c.gameObject.CompareTag("Enemy")){
                 EnemiesList.Add(c.transform);
+                StartCoroutine(Timer(2, c.transform));
+               
             }
         }
     }

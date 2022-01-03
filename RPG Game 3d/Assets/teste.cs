@@ -33,6 +33,10 @@ public class teste : MonoBehaviour {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(objRef.transform.position + transform.forward, radius);
         }
+        if(testeGismosType == 2){
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(scriptImport.objRefHandL.transform.position + new Vector3(offsetX, offsetY, offsetZ), radius);
+        }
 
     }
 }
